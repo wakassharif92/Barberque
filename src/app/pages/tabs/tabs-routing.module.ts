@@ -129,13 +129,13 @@ const routes: Routes = [
 								(m) => m.SalonProfilePageModule
 							),
 					},
-					{
-						path: "product-detail",
-						loadChildren: () =>
-							import(
-								"../../pages/salon-product-detail/product-detail/product-detail-routing.module"
-							).then((m) => m.ProductDetailPageRoutingModule),
-					},
+					// {
+					// 	path: "product-detail",
+					// 	loadChildren: () =>
+					// 		import(
+					// 			"../../pages/salon-product-detail/product-detail/product-detail-routing.module"
+					// 		).then((m) => m.ProductDetailPageRoutingModule),
+					// },
 
 					{
 						path: "select-time-slot",

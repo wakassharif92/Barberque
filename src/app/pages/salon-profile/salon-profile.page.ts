@@ -187,16 +187,16 @@ export class SalonProfilePage implements OnInit {
 	];
 
 	navigateToProductDetail(id) {
-		let navigationExtras: NavigationExtras = {
-			state: {
-				id: id,
-			},
-		};
-		this.Router.navigate(["tabs/home/product-detail"], navigationExtras);
-		localStorage.setItem("productID", id);
+		// let navigationExtras: NavigationExtras = {
+		// 	state: {
+		// 		id: id,
+		// 	},
+		// };
+		// this.Router.navigate(["tabs/home/product-detail"], navigationExtras);
+		// localStorage.setItem("productID", id);
 
-		// localStorage.setItem("productID", JSON.stringify(id));
-		// this.navCtrl.navigateForward("/product-detail");
+		localStorage.setItem("productID", JSON.stringify(id));
+		this.navCtrl.navigateForward("/product-detail");
 	}
 	getSalonProducts() {
 		this.apisalon

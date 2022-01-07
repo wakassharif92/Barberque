@@ -18,8 +18,8 @@ export class ProductDetailPage implements OnInit {
 	) {}
 
 	ngOnInit() {
-		//	this.productId = JSON.parse(localStorage.getItem("productID"));
-		this.productId = localStorage.getItem("productID");
+		this.productId = JSON.parse(localStorage.getItem("productID"));
+		//	this.productId = localStorage.getItem("productID");
 		this.getSalonProductByID();
 	}
 	getSalonProductByID() {
