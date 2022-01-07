@@ -1,0 +1,61 @@
+<ion-header class="ion-no-border">
+    <ion-toolbar mode="ios">
+        <ion-button (click)="back()" slot="start" fill="clear">
+            <ion-icon name="chevron-back"></ion-icon>
+        </ion-button>
+        <ion-item lines="none" class="ion-no-padding">
+            <ion-input autofocus="true" placeholder="{{'searchResulePage.searchPlace' | translate}}" [(ngModel)]="search"></ion-input>
+            <ion-icon (click)="searchApi()" slot="end" name="search-outline"></ion-icon>
+        </ion-item>
+        <ion-button (click)="back()" class="btn" slot="end" fill="clear" color="danger">{{'searchResulePage.cancel' | translate}}</ion-button>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+    <ion-row class="address">
+        <ion-col size="12">
+            <ion-item *ngIf="selectAddress != null" lines="none" class="ion-no-padding">
+                <img src="../../../assets/small_icon/location.png ">&nbsp;
+                <ion-text class="addresss">{{selectAddress | slice:0:30}} </ion-text>
+            </ion-item>
+
+            <p class="search-result">
+                <span *ngIf="data.length >= 1">{{'searchResulePage.resule' | translate}} ({{data.length}})</span>
+                <!-- <span class="ion-float-right" *ngIf="data.length != 0" (click)="presentmodal()"><img src="../../../assets/general_images/filter.png"></span> -->
+            </p>
+        </ion-col>
+    </ion-row>
+
+    <div class="salon-cards">
+        <ion-row class="salon-list" *ngFor="let item of data">
+            <ion-col size="2.9">
+                <img src="{{item.imagePath + item.image}} " height="70px " width="70px ">
+            </ion-col>
+            <ion-col size="9.1" class="col-border">
+                <h3>{{item.name}}</h3>
+                <ion-row>
+                    <ion-col size="9.5" class="ion-no-padding col-pad ">
+                        <ion-text class="address">{{item.address}}
+                        </ion-text>
+                    </ion-col>
+                </ion-row>
+                <p class="p">
+                    <ion-icon name="star"></ion-icon> {{item.rate}}
+                    <span *ngIf="res==='thursday' ">{{item.thursday.open}}  - {{item.thursday.close}}  </span> &nbsp;
+                    <span *ngIf="res=='friday' ">{{item.friday.open}}  - {{item.friday.close}}  </span> &nbsp;
+                    <span *ngIf="res=='saturday' ">{{item.saturday.open}}  - {{item.saturday.close}}  </span> &nbsp;
+                    <span *ngIf="res=='sunday' ">{{item.sunday.open}}  - {{item.sunday.close}}  </span> &nbsp;
+                    <span *ngIf="res=='monday' ">{{item.monday.open}}  - {{item.monday.close}}  </span> &nbsp;
+                    <span *ngIf="res=='tuesday' ">{{item.tuesday.open}}  - {{item.tuesday.close}}  </span> &nbsp;
+                    <span *ngIf="res=='wednesday' ">{{item.wednesday.open}}  - {{item.wednesday.close}}  </span> &nbsp;
+                    <ion-text class="ion-float-right "><img src="../../assets/general_images/location.png ">
+                        <ion-text class="location ">&nbsp;{{item.distance | number:'2.2-2'}} {{'searchResulePage.km' | translate}}</ion-text>
+                    </ion-text>
+                </p>
+                <ion-button *ngIf="language == 'en'" class="right" (click)="book(item?.salon_id) " mode="md " color="var(--pink-color) ">{{'searchResulePage.book' | translate}}</ion-button>
+                <ion-button *ngIf="language == 'ro'" class="right" (click)="book(item?.salon_id) " mode="md " color="var(--pink-color) ">{{'searchResulePage.book' | translate}}</ion-button>
+                <ion-button *ngIf="language == 'ar'" class="left" (click)="book(item?.salon_id) " mode="md " color="var(--pink-color) ">{{'searchResulePage.book' | translate}}</ion-button>
+            </ion-col>
+        </ion-row>
+    </div>
+</ion-content>

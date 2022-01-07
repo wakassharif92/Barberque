@@ -1,0 +1,536 @@
+<ion-content mode="ios">
+	<ion-header class="ion-no-border">
+		<ion-toolbar mode="ios">
+			<ion-buttons slot="start">
+				<ion-back-button
+					mode="md"
+					defaultHref="tabs/home"
+					text=""
+					icon="chevron-back"
+				></ion-back-button>
+			</ion-buttons>
+
+			<ion-title> {{data?.name}} </ion-title>
+		</ion-toolbar>
+	</ion-header>
+	<div class="header" [ngStyle]="{'background-image': 'url('+imageP+')'}">
+		<div class="dark-layer">
+			<div class="salon-detail">
+				<p class="salon-name">
+					{{data?.name}}<img src="../../../assets/share.png" />
+				</p>
+				<p class="salon-address">{{data?.address}}</p>
+				<p class="time-div">
+					<ion-button
+						class="green"
+						*ngIf="res == 'thursday' && openTime < timeClose && timeClose < endTime"
+						color="var(--green-color)"
+						>{{'salonProfile.open' | translate}}</ion-button
+					>
+					<ion-button
+						class="green"
+						*ngIf="res == 'friday' && openTime < timeClose && timeClose < endTime"
+						color="var(--green-color)"
+						>{{'salonProfile.open' | translate}}</ion-button
+					>
+					<ion-button
+						class="green"
+						*ngIf="res == 'wednesday' && openTime < timeClose && timeClose < endTime"
+						color="var(--green-color)"
+						>{{'salonProfile.open' | translate}}</ion-button
+					>
+					<ion-button
+						class="green"
+						*ngIf="res == 'saturday' && openTime < timeClose && timeClose < endTime"
+						color="var(--green-color)"
+						>{{'salonProfile.open' | translate}}</ion-button
+					>
+					<ion-button
+						class="green"
+						*ngIf="res == 'sunday' && openTime < timeClose && timeClose < endTime"
+						color="var(--green-color)"
+						>{{'salonProfile.open' | translate}}</ion-button
+					>
+					<ion-button
+						class="green"
+						*ngIf="res == 'monday' && openTime < timeClose && timeClose < endTime"
+						color="var(--green-color)"
+						>{{'salonProfile.open' | translate}}</ion-button
+					>
+					<ion-button
+						class="green"
+						*ngIf="res == 'tuesday'&& openTime < timeClose && timeClose < endTime"
+						color="var(--green-color)"
+						>{{'salonProfile.open' | translate}}</ion-button
+					>
+					<ion-button
+						class="red"
+						*ngIf="res == 'thursday' && timeClose > endTime"
+						color="ion-color-danger"
+						>{{'salonProfile.close' | translate}}</ion-button
+					>
+					<ion-button
+						class="red"
+						*ngIf="res == 'friday' && timeClose > endTime"
+						color="ion-color-danger"
+						>{{'salonProfile.close' | translate}}</ion-button
+					>
+					<ion-button
+						class="red"
+						*ngIf="res == 'saturday' && timeClose > endTime"
+						color="ion-color-danger"
+						>{{'salonProfile.close' | translate}}</ion-button
+					>
+					<ion-button
+						class="red"
+						*ngIf="res == 'sunday' && timeClose > endTime"
+						color="ion-color-danger"
+						>{{'salonProfile.close' | translate}}</ion-button
+					>
+					<ion-button
+						class="red"
+						*ngIf="res == 'monday' && timeClose > endTime"
+						color="ion-color-danger"
+						>{{'salonProfile.close' | translate}}</ion-button
+					>
+					<ion-button
+						class="red"
+						*ngIf="res == 'tuesday' && timeClose > endTime"
+						color="ion-color-danger"
+						>{{'salonProfile.close' | translate}}</ion-button
+					>
+					<ion-button
+						class="red"
+						*ngIf="res == 'wednesday' && timeClose > endTime"
+						color="ion-color-danger"
+						>{{'salonProfile.close' | translate}}</ion-button
+					>
+					<span *ngIf="res == 'thursday' && data?.thursday?.open != null"
+						>{{data?.thursday?.open}} to {{data?.thursday?.close}}
+					</span>
+					&nbsp;
+					<span *ngIf="res == 'friday' && data?.friday?.open != null"
+						>{{data?.friday?.open}} to {{data?.friday?.close}}
+					</span>
+					&nbsp;
+					<span *ngIf="res == 'saturday' && data?.saturday?.open != null"
+						>{{data?.saturday?.open}} to {{data?.saturday?.close}}
+					</span>
+					&nbsp;
+					<span *ngIf="res == 'sunday' && data?.sunday?.open != null"
+						>{{data?.sunday?.open}} to {{data?.sunday?.close}}
+					</span>
+					&nbsp;
+					<span *ngIf="res == 'monday' && data?.monday?.open != null"
+						>{{data?.monday?.open}} to {{data?.monday?.close}}
+					</span>
+					&nbsp;
+					<span *ngIf="res == 'tuesday' && data?.tuesday?.open != null"
+						>{{data?.tuesday?.open}} to {{data?.tuesday?.close}}
+					</span>
+					&nbsp;
+					<span *ngIf="res == 'wednesday' && data?.wednesday?.open != null"
+						>{{data?.wednesday?.open}} to {{data?.wednesday?.close}}
+					</span>
+					&nbsp;
+					<img src="../../../assets/Ellipse 9.png" />
+					<span>
+						<ion-icon name="star"></ion-icon>
+						{{data?.rate}} {{'salonProfile.Rating' | translate}}
+					</span>
+				</p>
+			</div>
+		</div>
+	</div>
+	<div class="section-two">
+		<ion-row class="ion-padding">
+			<ion-col size="12" class="ion-no-padding firstcols">
+				<ion-row class="r">
+					<ion-col
+						size="3"
+						*ngFor="let b of ('buttonDiv' | translate)"
+						class="colll"
+					>
+						<ion-button
+							class="ion-text-capitalize"
+							(click)="btnDivChaangedd(b)"
+							[ngClass]="selectedDes == b.name ? 'activee' : 'notactive'"
+							value="b.name"
+						>
+							{{b.name}}
+						</ion-button>
+						<div *ngIf="selectedDes == b.name" class="liti"></div>
+					</ion-col>
+				</ion-row>
+			</ion-col>
+		</ion-row>
+	</div>
+
+	<div
+		*ngIf="selectedDes == 'حول' || selectedDes == 'ABOUT' || selectedDes == 'DESPRE'"
+	>
+		<div class="ion-padding-start ion-padding-end paddd">
+			<h2>{{'salonProfile.About' | translate}} {{data?.name}}</h2>
+			<p>{{data?.desc}}</p>
+			<h2>{{'salonProfile.ServiceonDays' | translate}}</h2>
+			<div class="time">
+				<!-- <p>{{'salonProfile.Sunday' | translate}} <span *ngIf="res.data?.sunday?.open != null" class="ion-float-right">
+                        {{data?.sunday?.open}}  to {{data?.sunday?.close}} 
+                    </span>
+                    <span *ngIf="res.data?.sunday?.open == null" class="ion-float-right">
+                        {{'salonProfile.Closed' | translate}}
+                    </span>
+                </p> -->
+				<p>
+					{{'salonProfile.Sunday' | translate}}
+					<span *ngIf="data?.sunday?.open != null" class="ion-float-right">
+						{{data?.sunday?.open}} to {{data?.sunday?.close}}
+					</span>
+					<span *ngIf="data?.sunday?.open == null" class="ion-float-right">
+						{{'salonProfile.Closed' | translate}}
+					</span>
+				</p>
+				<p *ngIf="language == 'en'">
+					{{'salonProfile.Monday' | translate}}
+					<span class="ion-float-right">
+						{{data?.monday?.open}} to {{data?.monday?.close}}
+					</span>
+				</p>
+				<p *ngIf="language == 'en'">
+					{{'salonProfile.Tuesday' | translate}}
+					<span class="ion-float-right">
+						{{data?.tuesday?.open}} to {{data?.tuesday?.close}}
+					</span>
+				</p>
+				<p *ngIf="language == 'en'">
+					{{'salonProfile.Wednesday' | translate}}
+					<span class="ion-float-right">
+						{{data?.wednesday?.open}} to {{data?.wednesday?.close}}
+					</span>
+				</p>
+				<p *ngIf="language == 'en'">
+					{{'salonProfile.Thursday' | translate }}
+					<span class="ion-float-right">
+						{{data?.thursday?.open}} to {{data?.thursday?.close}}
+					</span>
+				</p>
+				<p *ngIf="language == 'en'">
+					{{'salonProfile.Friday' | translate}}
+					<span class="ion-float-right">
+						{{data?.friday?.open}} to {{data?.friday?.close}}
+					</span>
+				</p>
+				<p *ngIf="language == 'en'">
+					{{'salonProfile.Saturday' | translate}}
+					<span class="ion-float-right">
+						{{data?.saturday?.open}} to {{data?.saturday?.close}}
+					</span>
+				</p>
+				<p *ngIf="language == 'ar'">
+					{{'salonProfile.Monday' | translate}}
+					<span class="ion-float-left">
+						{{data?.monday?.close}} - {{data?.monday?.open}}
+					</span>
+				</p>
+				<p *ngIf="language == 'ar'">
+					{{'salonProfile.Tuesday' | translate}}
+					<span class="ion-float-left">
+						{{data?.tuesday?.close}} - {{data?.tuesday?.open}}
+					</span>
+				</p>
+				<p *ngIf="language == 'ar'">
+					{{'salonProfile.Wednesday' | translate}}
+					<span class="ion-float-left">
+						{{data?.wednesday?.close}} - {{data?.wednesday?.open}}
+					</span>
+				</p>
+				<p *ngIf="language == 'ar'">
+					{{'salonProfile.Thursday' | translate }}
+					<span class="ion-float-left">
+						{{data?.thursday?.close}} - {{data?.thursday?.open}}
+					</span>
+				</p>
+				<p *ngIf="language == 'ar'">
+					{{'salonProfile.Friday' | translate}}
+					<span class="ion-float-left">
+						{{data?.friday?.close}} - {{data?.friday?.open}}
+					</span>
+				</p>
+				<p *ngIf="language == 'ar'">
+					{{'salonProfile.Saturday' | translate}}
+					<span class="ion-float-left">
+						{{data?.saturday?.close}} - {{data?.saturday?.open}}
+					</span>
+				</p>
+				<p *ngIf="language == 'ro'">
+					{{'salonProfile.Monday' | translate}}
+					<span class="ion-float-right">
+						{{data?.monday?.open}} to {{data?.monday?.close}}
+					</span>
+				</p>
+				<p *ngIf="language == 'ro'">
+					{{'salonProfile.Tuesday' | translate}}
+					<span class="ion-float-right">
+						{{data?.tuesday?.open}} to {{data?.tuesday?.close}}
+					</span>
+				</p>
+				<p *ngIf="language == 'ro'">
+					{{'salonProfile.Wednesday' | translate}}
+					<span class="ion-float-right">
+						{{data?.wednesday?.open}} to {{data?.wednesday?.close}}
+					</span>
+				</p>
+				<p *ngIf="language == 'ro'">
+					{{'salonProfile.Thursday' | translate }}
+					<span class="ion-float-right">
+						{{data?.thursday?.open}} to {{data?.thursday?.close}}
+					</span>
+				</p>
+				<p *ngIf="language == 'ro'">
+					{{'salonProfile.Friday' | translate}}
+					<span class="ion-float-right">
+						{{data?.friday?.open}} to {{data?.friday?.close}}
+					</span>
+				</p>
+				<p *ngIf="language == 'ro'">
+					{{'salonProfile.Saturday' | translate}}
+					<span class="ion-float-right">
+						{{data?.saturday?.open}} to {{data?.saturday?.close}}
+					</span>
+				</p>
+			</div>
+			<h2></h2>
+			<ion-row class="location-div">
+				<ion-col size="3">
+					<img src="../../../assets/NoPath - Copy.png" height="70" width="70" />
+				</ion-col>
+				<ion-col size="9">
+					<p class="addressDiv">{{data?.address}}</p>
+					<hr />
+					<p>
+						<img src="../../../assets/location.png" />{{distance |
+						number:'2.2-2'}} km
+						<span (click)="setTheDirection()" class="ion-float-right"
+							><img src="../../../assets/navigation.png" /> {{'salonProfile.see'
+							| translate}}</span
+						>
+					</p>
+				</ion-col>
+			</ion-row>
+			<h2>{{'salonProfile.contac' | translate}}</h2>
+			<h1 (click)="call()">
+				<img src="../../../assets/call.png" /> {{'salonProfile.call' |
+				translate}}
+				<ion-button fill="clear" class="ion-float-right"
+					>+91 {{data?.phone}}</ion-button
+				>
+			</h1>
+		</div>
+	</div>
+	<div
+		*ngIf="selectedDes =='PRODUCT' || selectedDes == 'PRODUCTS' || selectedDes == 'PRODUCT'"
+	>
+		<div class="ion-padding-start ion-padding-end">
+			<ion-row
+				*ngFor="let item of productsList;let i=index"
+				(click)="navigateToProductDetail(item.id)"
+			>
+				<ion-col size="11 ">
+					<ion-item class="ion-no-padding" lines="none">
+						<ngx-progressive-img-loader
+							[height]="'100%'"
+							[width]="'100%'"
+							[placeholderBgColor]="'#ccc'"
+							[placeholderImg]="'https://vignette.wikia.nocookie.net/the-darkest-minds/images/4/47/Placeholder.png/revision/latest/scale-to-width-down/240?cb=20160927044640'"
+							[preserveAspectRatio]="true"
+							[img]="item?.image[0].image"
+							[thumbnail]="'https://picsum.photos/200/200?image='"
+							[fallbackImg]="'https://skirtingboardsdirect.com/wp-content/uploads/2014/12/Fallback-Image-600x600.png'"
+						>
+						</ngx-progressive-img-loader>
+						<ion-text>{{item.salon_name}}</ion-text>
+						<ion-text style="color: var(--input-text-color)" slot="end"
+							>{{currency}}{{item.price}}</ion-text
+						>
+					</ion-item>
+				</ion-col>
+			</ion-row>
+		</div>
+	</div>
+	<div
+		*ngIf="selectedDes == 'صالة عرض' || selectedDes == 'GALLERY' || selectedDes == 'GALERIE'"
+	>
+		<div *ngIf="gallary" class="pins">
+			<ion-card class="pin" *ngFor="let imageURL of gallary">
+				<img
+					[src]="imageURL?.imagePath + imageURL?.image "
+					(click)="photoShow(imageURL) "
+				/>
+			</ion-card>
+		</div>
+		<div *ngIf="!gallary">
+			<div class="pins">
+				<ion-card class="pin" *ngFor="let imageURL of [1,2,3]">
+					<ion-skeleton-text
+						animated
+						*ngIf="!imageURL?.imagePath"
+						style="height: 80px; width: 80px"
+					></ion-skeleton-text>
+				</ion-card>
+			</div>
+		</div>
+		<div *ngIf="gallary?.length ==0">
+			<div class="ion-text-center" class="no">
+				<img src="../../../assets/general_images/no-data-icon-10.jpg" alt="" />
+			</div>
+		</div>
+	</div>
+	<div
+		*ngIf="selectedDes == 'إحجز' || selectedDes=='SERVICES' || selectedDes=='SERVICII'"
+	>
+		<div class="btn_div">
+			<ion-button
+				class="ion-text-capitalize"
+				[ngClass]="s==c.name ? 'active' : 'segment_btn' "
+				*ngFor="let c of category "
+				(click)="btnChanged(c.name)"
+				value="c.name"
+			>
+				{{c.name}}
+				<ion-ripple-effect></ion-ripple-effect>
+			</ion-button>
+		</div>
+
+		<div>
+			<div class="ion-padding-start ion-padding-end">
+				<ion-row
+					*ngFor="let item of services;let i=index"
+					(click)="verifyEvent(item.service_id)"
+				>
+					<ion-col size="1">
+						<ion-checkbox [checked]="item.isItemChecked == true"></ion-checkbox>
+					</ion-col>
+					<ion-col size="11 ">
+						<ion-item class="ion-no-padding" lines="none">
+							<ngx-progressive-img-loader
+								[height]="'100%'"
+								[width]="'100%'"
+								[placeholderBgColor]="'#ccc'"
+								[placeholderImg]="'https://vignette.wikia.nocookie.net/the-darkest-minds/images/4/47/Placeholder.png/revision/latest/scale-to-width-down/240?cb=20160927044640'"
+								[preserveAspectRatio]="true"
+								[img]="item?.imagePath + item?.image"
+								[thumbnail]="'https://picsum.photos/200/200?image='"
+								[fallbackImg]="'https://skirtingboardsdirect.com/wp-content/uploads/2014/12/Fallback-Image-600x600.png'"
+							>
+							</ngx-progressive-img-loader>
+							<ion-text>{{item.name}}</ion-text>
+							<ion-text style="color: var(--input-text-color)" slot="end"
+								>{{currency}}{{item.price}}</ion-text
+							>
+						</ion-item>
+					</ion-col>
+				</ion-row>
+				<div *ngIf="services?.length ==0">
+					<div class="ion-text-center" class="no">
+						<img
+							src="../../../assets/general_images/no-data-icon-10.jpg"
+							alt=""
+						/>
+					</div>
+				</div>
+				<div *ngIf="!services">
+					<ion-row *ngFor="let item of [1,2,3]">
+						<ion-col size="1">
+							<ion-checkbox
+								[checked]="item.isItemChecked == true"
+							></ion-checkbox>
+						</ion-col>
+						<ion-col size="11">
+							<ion-item class="ion-no-padding" lines="none">
+								<ion-skeleton-text
+									animated
+									*ngIf="!item?.imagePath"
+									style="height: 32px; width: 32px"
+								></ion-skeleton-text>
+								<ion-skeleton-text
+									animated
+									*ngIf="!item?.name"
+									style="height: 32px"
+								></ion-skeleton-text>
+								<ion-skeleton-text
+									animated
+									*ngIf="!item?.price"
+									style="height: 32px"
+								></ion-skeleton-text>
+							</ion-item>
+						</ion-col>
+					</ion-row>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div
+		*ngIf="selectedDes == 'مراجعة' || selectedDes == 'REVIEW' || selectedDes == 'REVIZUIRE'"
+		class="review ion-padding"
+	>
+		<h1 (click)="presentModal() ">{{'salonProfile.review' | translate}}</h1>
+		<p>{{'salonProfile.totalReview' | translate}} ({{review.length}})</p>
+		<div class="review_div">
+			<ion-row *ngFor="let r of review" class="ion-margin-bottom">
+				<ion-col size="2 ">
+					<img
+						style="border-radius: 50%"
+						src="{{r?.user?.imagePath + r?.user?.image}} "
+						height="35px "
+						width="35px "
+					/>
+					<p class="icon">
+						<ion-icon name="star "></ion-icon>
+						{{r?.rate}}.0
+					</p>
+				</ion-col>
+				<ion-col size="10 " class="review-col">
+					<h4>
+						{{r.user.name}}
+						<span class="ion-float-right">{{r.user.updated_at | timeAgo}}</span>
+					</h4>
+					<p class="review-text">{{r.message}}</p>
+				</ion-col>
+			</ion-row>
+		</div>
+	</div>
+</ion-content>
+<ion-footer class="ion-no-border">
+	<ion-toolbar class="ion-no-padding">
+		<ion-button mode="ios" class="btn" color="var(--blue-color)" expand="full">
+			<h1>{{'salonProfile.total' | translate}}: {{currency}}{{total}}</h1>
+			<ion-button
+				*ngIf="data?.give_service == 'Both' && serviceAt != ''"
+				(click)="payment()"
+				mode="ios"
+				class="service"
+				[disabled]="local.length==''"
+				color="white"
+				>{{'salonProfile.bookService' | translate}}</ion-button
+			>
+			<ion-button
+				*ngIf="data?.give_service == 'Both' && serviceAt == ''"
+				(click)="presentAlertConfirm()"
+				mode="ios"
+				class="service"
+				[disabled]="local.length==''"
+				color="white"
+				>{{'serviceAt.title' | translate}} !</ion-button
+			>
+			<ion-button
+				*ngIf="data?.give_service == 'Home' || data?.give_service == 'Salon' "
+				(click)="payment()"
+				mode="ios"
+				class="service"
+				[disabled]="local.length==''"
+				color="white"
+				>{{'salonProfile.bookService' | translate}}</ion-button
+			>
+		</ion-button>
+	</ion-toolbar>
+</ion-footer>
