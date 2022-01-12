@@ -22,6 +22,9 @@ export class ProductDetailPage implements OnInit {
 		//	this.productId = localStorage.getItem("productID");
 		this.getSalonProductByID();
 	}
+	goToCart() {
+		this.navCtrl.navigateForward("/cart");
+	}
 	getSalonProductByID() {
 		this.apisalon.getData("salon-product/" + 1).subscribe((mdata: any) => {
 			this.productList = mdata.data[0];

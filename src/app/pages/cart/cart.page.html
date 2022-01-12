@@ -1,0 +1,66 @@
+<ion-header class="ion-no-border">
+	<ion-toolbar mode="ios">
+		<ion-buttons slot="start">
+			<ion-back-button
+				mode="md"
+				defaultHref="tabs/appointment"
+				text=""
+				icon="chevron-back"
+				(click)="backs()"
+			></ion-back-button>
+		</ion-buttons>
+		<ion-title> {{'Cart.cart' | translate}} </ion-title>
+	</ion-toolbar>
+</ion-header>
+<ion-content>
+	<ion-item>
+		<ion-avatar slot="start">
+			<img
+				src="https://i.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U"
+			/>
+		</ion-avatar>
+		<ion-label>
+			<h3 class="product-name-styling">Product Name</h3>
+			<ion-icon class="trash-styling" name="trash-outline"></ion-icon>
+			<h4 class="product-description-h-color">
+				Infused with GOLD QUINOA + PROTEIN, the professional formula of the
+				Instant Resurfacing Shampoo immediately cleanses and restructures
+				damaged hair, while leaving it with a lightweight touch.
+			</h4>
+			<div>
+				<div class="div-quantity">
+					<ion-icon
+						class="quantity-icon"
+						name="remove-circle"
+						(click)="decreement()"
+					></ion-icon>
+					<ion-label class="quantity-label">{{currentNumber}}</ion-label>
+					<ion-icon
+						class="quantity-icon"
+						(click)="increement()"
+						name="add-circle"
+					></ion-icon>
+				</div>
+			</div>
+			<ion-label class="label-price"
+				><p class="product-label">$200</p></ion-label
+			>
+		</ion-label>
+	</ion-item>
+	<div class="div-bottom">
+		<div class="div-total">
+			<ion-label class="div-label">
+				<p class="div-total-total">Total:</p>
+				<p class="div-total-price">$200</p>
+			</ion-label>
+		</div>
+		<ion-button
+			(click)="goToCheckOut()"
+			color="warning"
+			style="font-family: mon-medium; float: right"
+		>
+			<ion-icon style="zoom: 1" slot="icon-only" size="" name="cart"></ion-icon>
+			<ion-text>Check Out</ion-text>
+		</ion-button>
+	</div>
+</ion-content>

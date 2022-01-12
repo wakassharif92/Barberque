@@ -139,6 +139,12 @@
     "SalonProductDetail":{
         "productDetails":"Product Details"
     },
+    "checkout":{
+"checkout":"Checkout"
+    },
+    "Cart":{
+        "cart":"My Cart"
+    },
     "SingleAppointment": {
         "extracharge": "extra charges",
         "book": "Appointment Details",

@@ -38,15 +38,13 @@
 			<ion-icon style="zoom: 1" slot="icon-only" name="card"></ion-icon>
 			<ion-text>Buy Now</ion-text>
 		</ion-button>
-		<ion-button color="warning" style="font-family: mon-medium">
+		<ion-button
+			color="warning"
+			style="font-family: mon-medium"
+			(click)="goToCart()"
+		>
 			<ion-icon style="zoom: 1" slot="icon-only" size="" name="cart"></ion-icon>
 			<ion-text>Add to Cart</ion-text>
 		</ion-button>
-		<!-- <ion-button color="danger" style="font-family: mon-medium"
-			>Buy Now</ion-button
-		> -->
-		<!-- <ion-button color="warning" style="font-family: mon-medium"
-			>Add to Cart</ion-button
-		> -->
 	</div>
 </ion-content>

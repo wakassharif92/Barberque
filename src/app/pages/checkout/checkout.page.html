@@ -1,0 +1,100 @@
+<ion-header class="ion-no-border">
+	<ion-toolbar mode="ios">
+		<ion-buttons slot="start">
+			<ion-back-button
+				mode="md"
+				defaultHref="tabs/appointment"
+				text=""
+				icon="chevron-back"
+				(click)="backs()"
+			></ion-back-button>
+		</ion-buttons>
+		<ion-title> {{'checkout.checkout' | translate}} </ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<form [formGroup]="myForm" (ngSubmit)="onSubmit()" novalidate>
+		<ion-item lines="full">
+			<ion-label position="floating">Name</ion-label>
+			<ion-input formControlName="name" type="text"></ion-input>
+		</ion-item>
+		<span
+			class="error ion-padding"
+			*ngIf="submitted && errorCtr.name.errors?.required"
+		>
+			Name is required.
+		</span>
+		<span
+			class="error ion-padding"
+			*ngIf="submitted && errorCtr.name.errors?.minlength"
+		>
+			Min 3 chars long.
+		</span>
+
+		<ion-item lines="full">
+			<ion-label position="floating">Phone No</ion-label>
+			<ion-input formControlName="phone" type="phone"></ion-input>
+		</ion-item>
+		<span
+			class="error ion-padding"
+			*ngIf="submitted && errorCtr.phone.errors?.required"
+		>
+			Phone Number is required.
+		</span>
+		<span
+			class="error ion-padding"
+			*ngIf="submitted && errorCtr.phone.errors?.pattern"
+		>
+			Number values allowed.
+		</span>
+		<ion-item lines="full">
+			<ion-label position="floating">City</ion-label>
+			<ion-input formControlName="city" type="text"></ion-input>
+		</ion-item>
+		<span
+			class="error ion-padding"
+			*ngIf="submitted && errorCtr.city.errors?.required"
+		>
+			City is required.
+		</span>
+		<ion-item lines="full">
+			<ion-label position="floating">State</ion-label>
+			<ion-input formControlName="state" type="state"></ion-input>
+		</ion-item>
+		<span
+			class="error ion-padding"
+			*ngIf="submitted && errorCtr.state.errors?.required"
+		>
+			State is required.
+		</span>
+		<ion-item lines="full">
+			<ion-label position="floating">Country</ion-label>
+			<ion-input formControlName="country" type="text"></ion-input>
+		</ion-item>
+		<span
+			class="error ion-padding"
+			*ngIf="submitted && errorCtr.country.errors?.required"
+		>
+			Country is required.
+		</span>
+
+		<ion-item lines="full">
+			<ion-label position="floating">Address</ion-label>
+			<ion-input formControlName="address" type="text"></ion-input>
+		</ion-item>
+		<span
+			class="error ion-padding"
+			*ngIf="submitted && errorCtr.address.errors?.required"
+		>
+			Address is required.
+		</span>
+		<ion-row>
+			<ion-col>
+				<ion-button type="submit" color="danger" expand="block"
+					>Proceed To Pay</ion-button
+				>
+			</ion-col>
+		</ion-row>
+	</form>
+</ion-content>

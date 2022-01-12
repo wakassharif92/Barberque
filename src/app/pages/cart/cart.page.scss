@@ -1,0 +1,80 @@
+.product-description-h-color {
+	color: grey;
+	float: left;
+	margin-bottom: 10px;
+}
+.product-name-styling {
+	float: left;
+}
+.div-quantity {
+	margin-top: 10px;
+}
+.quantity-icon {
+	zoom: 1.2;
+	color: deeppink;
+	float: left;
+}
+.quantity-label {
+	float: left;
+	padding-left: 1rem;
+	padding-right: 1rem;
+}
+
+.product-label {
+	color: red;
+	font-size: 1.5rem;
+	float: right;
+}
+.trash-styling {
+	zoom: 1.2;
+	color: deeppink;
+	float: right;
+	margin-right: 10px;
+}
+
+.div-checkout {
+	position: fixed;
+	right: 10px;
+	bottom: 0px;
+}
+.label-price {
+	float: right;
+}
+.div-total {
+	position: fixed;
+	// right: 10px;
+	left: 10px;
+	bottom: 5px;
+}
+.div-bottom {
+	background-color: deeppink;
+	position: fixed;
+	bottom: 5px;
+	width: 100%;
+}
+.div-label {
+	float: left;
+	margin-bottom: 8px;
+}
+.checkout-price {
+	color: white;
+
+	font-size: 1.5rem;
+}
+.div-p-total {
+	float: left;
+}
+.div-total-price {
+	color: white;
+	font-size: 1.5rem;
+	float: left;
+	font-family: mon-bold;
+}
+.checkout-total {
+	float: left;
+}
+.div-total-total {
+	color: white;
+	float: left;
+	font-family: mon-bold;
+}
