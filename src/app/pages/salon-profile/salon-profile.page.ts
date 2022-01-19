@@ -25,6 +25,7 @@ import {
 })
 export class SalonProfilePage implements OnInit {
 	id: any;
+	pageName: string = `Barberque Nation`;
 	data: any = {};
 	imageP: any;
 	number: any;
@@ -66,7 +67,7 @@ export class SalonProfilePage implements OnInit {
 	openTime: any;
 	photo: any;
 	productsList: any;
-
+	cartCounter: any;
 	constructor(
 		private Router: Router,
 		private modal: ModalController,
@@ -117,6 +118,9 @@ export class SalonProfilePage implements OnInit {
 		this.platform.backButton.subscribe(() => {
 			this.navCtrl.navigateBack("tabs/home");
 		});
+	}
+	openCart() {
+		this.navCtrl.navigateForward("/cart");
 	}
 
 	verifyEvent(id) {
@@ -186,7 +190,7 @@ export class SalonProfilePage implements OnInit {
 		},
 	];
 
-	navigateToProductDetail(id) {
+	navigateToProductDetail(item) {
 		// let navigationExtras: NavigationExtras = {
 		// 	state: {
 		// 		id: id,
@@ -194,8 +198,9 @@ export class SalonProfilePage implements OnInit {
 		// };
 		// this.Router.navigate(["tabs/home/product-detail"], navigationExtras);
 		// localStorage.setItem("productID", id);
-
-		localStorage.setItem("productID", JSON.stringify(id));
+		//console.log(item.id);
+		localStorage.setItem("productDetail", JSON.stringify(item));
+		//	console.log("testingSalonProfileItem" + JSON.stringify(item));
 		this.navCtrl.navigateForward("/product-detail");
 	}
 	getSalonProducts() {
@@ -207,6 +212,13 @@ export class SalonProfilePage implements OnInit {
 			});
 	}
 	ngOnInit() {
+		this.cartCounter = JSON.parse(localStorage.getItem("addProducts"));
+		if (this.cartCounter) {
+			this.cartCounter = this.cartCounter.length;
+		} else {
+			this.cartCounter = 0;
+		}
+
 		this.util.startLoad();
 		this.api.getData("salon/" + this.id).subscribe(
 			(success: any) => {
