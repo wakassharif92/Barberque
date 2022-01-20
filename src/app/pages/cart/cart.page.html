@@ -6,52 +6,54 @@
 				defaultHref="tabs/appointment"
 				text=""
 				icon="chevron-back"
-				(click)="backs()"
 			></ion-back-button>
 		</ion-buttons>
 		<ion-title> {{'Cart.cart' | translate}} </ion-title>
 	</ion-toolbar>
 </ion-header>
 <ion-content>
-	<ion-item>
+	<ion-item *ngFor="let item of storageProducts;let i=index">
 		<ion-avatar slot="start">
-			<img
-				src="https://i.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U"
-			/>
+			<img [src]="item?.image" />
 		</ion-avatar>
+
 		<ion-label>
-			<h3 class="product-name-styling">Product Name</h3>
-			<ion-icon class="trash-styling" name="trash-outline"></ion-icon>
-			<h4 class="product-description-h-color">
-				Infused with GOLD QUINOA + PROTEIN, the professional formula of the
-				Instant Resurfacing Shampoo immediately cleanses and restructures
-				damaged hair, while leaving it with a lightweight touch.
-			</h4>
+			<ion-icon
+				class="trash-styling"
+				name="trash-outline"
+				(click)="removeItem(item.id)"
+			></ion-icon>
+			<h3 class="product-name-styling">{{item?.title}}</h3>
+
+			<h4 class="product-description-h-color">{{item?.description}}</h4>
 			<div>
 				<div class="div-quantity">
 					<ion-icon
 						class="quantity-icon"
 						name="remove-circle"
-						(click)="decreement()"
+						(click)="decreement(item?.id)"
 					></ion-icon>
-					<ion-label class="quantity-label">{{currentNumber}}</ion-label>
+					<ion-label class="quantity-label">{{item?.quantity}}</ion-label>
 					<ion-icon
 						class="quantity-icon"
-						(click)="increement()"
+						(click)="increement(item?.id)"
 						name="add-circle"
 					></ion-icon>
 				</div>
 			</div>
 			<ion-label class="label-price"
-				><p class="product-label">$200</p></ion-label
+				><p class="product-label">
+					{{currencyType}} {{item?.price}}
+				</p></ion-label
 			>
 		</ion-label>
+		<!-- <ion-label style="display: none">{{getTotal(item?.price)}}</ion-label> -->
 	</ion-item>
-	<div class="div-bottom">
+	<div *ngIf="showBottomBar" class="div-bottom">
 		<div class="div-total">
 			<ion-label class="div-label">
-				<p class="div-total-total">Total:</p>
-				<p class="div-total-price">$200</p>
+				<p class="div-total-total">Total</p>
+				<p class="div-total-price">: {{currencyType}}{{totalPrice}}"</p>
 			</ion-label>
 		</div>
 		<ion-button

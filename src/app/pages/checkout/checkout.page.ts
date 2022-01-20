@@ -1,20 +1,26 @@
 import { Component, OnInit } from "@angular/core";
 import { NavController, Platform } from "@ionic/angular";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { Stripe } from "@awesome-cordova-plugins/stripe/ngx";
+// import { Stripe } from "@awesome-cordova-plugins/stripe/ngx";
 import {
 	InAppBrowser,
 	InAppBrowserOptions,
 } from "@ionic-native/in-app-browser/ngx";
+import { PlaceOrderApiService } from "src/app/services/place-order-api.service";
 @Component({
 	selector: "app-checkout",
 	templateUrl: "./checkout.page.html",
 	styleUrls: ["./checkout.page.scss"],
 })
 export class CheckoutPage implements OnInit {
+	cartItemsDetails: any;
 	myForm: FormGroup;
+	showSpinner = false;
 	submitted = false;
-	constructor(private navCtrl: NavController, public formBuilder: FormBuilder, private stripe: Stripe, private platform: Platform, private theInAppBrowser: InAppBrowser) {
+	constructor(private navCtrl: NavController, public formBuilder: FormBuilder, /*private stripe: Stripe,*/ private platform: Platform, private theInAppBrowser: InAppBrowser
+	,
+		public ApiPlaceOrderDetail: PlaceOrderApiService
+	) {
 		this.myForm = this.formBuilder.group({
 			name: ["", [Validators.required, Validators.minLength(3)]],
 			city: ["", [Validators.required, Validators.minLength(3)]],
@@ -49,13 +55,43 @@ export class CheckoutPage implements OnInit {
 		return this.myForm.controls;
 	}
 
-	onSubmit() {
+	async onSubmit() {
 		this.submitted = true;
 		if (!this.myForm.valid) {
 			console.log("All fields are required.");
 			return false;
 		} else {
-			console.log(this.myForm.value);
+			this.showSpinner = true;
+			//console.log(this.myForm.value);
+			this.cartItemsDetails = localStorage.getItem("addProducts");
+			//console.log(this.cartItemsDetails);
+			//this.cartItemsDetails = JSON.parse(this.cartItemsDetails);
+			console.log(this.cartItemsDetails[0].id);
+			const name = this.myForm.get("name").value;
+			const contact = this.myForm.get("phone").value;
+			const city = this.myForm.get("city").value;
+			const state = this.myForm.get("state").value;
+			const country = this.myForm.get("country").value;
+			const address = this.myForm.get("address").value;
+			const product_id = this.cartItemsDetails[0].id;
+			const price = this.cartItemsDetails[0].price;
+			const quantity = this.cartItemsDetails[0].quantity;
+
+			const res = await this.ApiPlaceOrderDetail.postCheckOutDetail(
+				name,
+				contact,
+				city,
+				state,
+				country,
+				address,
+				price,
+				quantity,
+				product_id
+			);
+			this.showSpinner = false;
+			// if (res === "true") {
+			// } else {
+			// }
 		}
 	}
 

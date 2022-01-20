@@ -10,29 +10,32 @@
 			></ion-back-button>
 		</ion-buttons>
 		<ion-title> {{'SalonProductDetail.productDetails' | translate}} </ion-title>
+		<ion-button fill="clear" slot="end" (click)="openCart()"
+			><ion-icon slot="start" name="cart"></ion-icon
+			><ion-badge slot="end" class="ion-no-padding badgeCustom"
+				>{{cartCounter}}</ion-badge
+			></ion-button
+		>
 	</ion-toolbar>
 </ion-header>
 
 <ion-content>
 	<div>
-		<ion-img
-			style="width: 100%"
-			[src]="'https://i.picsum.photos/id/314/200/200.jpg?hmac=bCAc2iO5ovLPrvwDQV31aBPS13QTyv33ut2H2wY4QXU'"
-		></ion-img>
+		<ion-img style="width: 100%" [src]="productImage"></ion-img>
 	</div>
+	<hr />
 	<div class="product-padding">
-		<ion-label class="product-price"> $200 </ion-label>
-	</div>
-	<div class="product-padding">
-		<ion-label class="product-title"> L'Oreal Shampoo </ion-label>
-	</div>
-	<div class="product-padding">
-		<ion-label class="product-description">
-			Infused with GOLD QUINOA + PROTEIN, the professional formula of the
-			Instant Resurfacing Shampoo immediately cleanses and restructures damaged
-			hair, while leaving it with a lightweight touch.
+		<ion-label class="product-price"
+			>{{this.currencyType}}{{this.productPrice}}
 		</ion-label>
 	</div>
+	<div class="product-padding">
+		<ion-label class="product-title"> {{this.productTitle}} </ion-label>
+	</div>
+	<div class="product-padding">
+		<ion-label class="product-description"> {{productDescription}} </ion-label>
+	</div>
+
 	<div style="float: right; padding-right: 1rem">
 		<ion-button color="danger" style="font-family: mon-medium">
 			<ion-icon style="zoom: 1" slot="icon-only" name="card"></ion-icon>

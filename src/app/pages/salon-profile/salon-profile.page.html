@@ -11,8 +11,15 @@
 			</ion-buttons>
 
 			<ion-title> {{data?.name}} </ion-title>
+			<ion-button fill="clear" slot="end" color="blue" (click)="openCart()"
+				><ion-icon slot="start" name="cart"></ion-icon
+				><ion-badge slot="end" class="ion-no-padding badgeCustom"
+					>{{cartCounter}}</ion-badge
+				></ion-button
+			>
 		</ion-toolbar>
 	</ion-header>
+	<!-- <app-header [pageName]="pageName"></app-header> -->
 	<div class="header" [ngStyle]="{'background-image': 'url('+imageP+')'}">
 		<div class="dark-layer">
 			<div class="salon-detail">
@@ -333,7 +340,7 @@
 		<div class="ion-padding-start ion-padding-end">
 			<ion-row
 				*ngFor="let item of productsList;let i=index"
-				(click)="navigateToProductDetail(item.id)"
+				(click)="navigateToProductDetail(item)"
 			>
 				<ion-col size="11 ">
 					<ion-item class="ion-no-padding" lines="none">

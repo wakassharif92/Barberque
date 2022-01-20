@@ -37,12 +37,14 @@ import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { NgSelectModule } from "@ng-select/ng-select";
 import { NgxProgressiveImgLoaderModule } from "ngx-progressive-img-loader";
 import { SignInWithApple } from "@ionic-native/sign-in-with-apple/ngx";
+import { HeaderComponent } from "./components/header/header.component";
 
 @NgModule({
-	declarations: [AppComponent, TimeAgoPipe],
+	declarations: [AppComponent, TimeAgoPipe, HeaderComponent],
 	entryComponents: [],
 	imports: [
 		FormsModule,
+
 		BrowserModule,
 		IonicModule.forRoot(),
 		AppRoutingModule,

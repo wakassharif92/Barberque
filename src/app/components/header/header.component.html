@@ -1,0 +1,21 @@
+<ion-header class="ion-no-border">
+	<ion-toolbar mode="ios">
+		<ion-buttons slot="start">
+			<ion-back-button
+				mode="md"
+				defaultHref="tabs/appointment"
+				text=""
+				icon="chevron-back"
+				(click)="backs()"
+			></ion-back-button>
+			<button id="notification-button" ion-button clear>
+				<ion-icon name="notifications">
+					<ion-badge id="notifications-badge" color="danger">5</ion-badge>
+				</ion-icon>
+			</button>
+		</ion-buttons>
+		<ion-title *ngIf="pageName">
+			{{ "checkout.checkout" | translate }}
+		</ion-title>
+	</ion-toolbar>
+</ion-header>
