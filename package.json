@@ -22,6 +22,8 @@
         "@angular/platform-browser": "~9.1.6",
         "@angular/platform-browser-dynamic": "~9.1.6",
         "@angular/router": "~9.1.6",
+        "@awesome-cordova-plugins/core": "^5.37.3",
+        "@awesome-cordova-plugins/stripe": "^5.37.3",
         "@capacitor/android": "^2.2.1",
         "@fullcalendar/core": "^5.1.0",
         "@fullcalendar/daygrid": "^5.1.0",
@@ -41,7 +43,6 @@
         "@ionic-native/social-sharing": "^5.30.0",
         "@ionic-native/splash-screen": "^5.0.0",
         "@ionic-native/status-bar": "^5.0.0",
-        "@ionic-native/stripe": "^5.27.0",
         "@ionic/angular": "^5.0.0",
         "@ionic/storage": "^2.2.0",
         "@ng-select/ng-select": "^5.0.3",
@@ -141,8 +142,8 @@
                 "WEB_APPLICATION_CLIENT_ID": ""
             },
             "cordova-plugin-facebook-connect": {
-                "APP_ID": "",
-                "APP_NAME": "",
+                "APP_ID": "2040015982704493",
+                "APP_NAME": "Pure Matrimony",
                 "FACEBOOK_URL_SCHEME_SUFFIX": " ",
                 "FACEBOOK_AUTO_LOG_APP_EVENTS": "true",
                 "FACEBOOK_HYBRID_APP_EVENTS": "false",
@@ -152,7 +153,8 @@
                 "FACEBOOK_BROWSER_SDK_VERSION": "v9.0"
             },
             "cordova-plugin-androidx": {},
-            "cordova-plugin-androidx-adapter": {}
+            "cordova-plugin-androidx-adapter": {},
+            "cordova-plugin-stripe": {}
         },
         "platforms": [
             "android"

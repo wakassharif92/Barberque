@@ -25,7 +25,7 @@ import { IonicStorageModule } from "@ionic/storage";
 import { TimeAgoPipe } from "time-ago-pipe";
 import { AuthGuardService } from "./services/auth-guard.service";
 import { AuthenticationService } from "./services/authentication.service";
-import { Stripe } from "@ionic-native/stripe/ngx";
+import { Stripe } from "@awesome-cordova-plugins/stripe/ngx";
 import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 import { PhotoViewer } from "@ionic-native/photo-viewer/ngx";
 import { InAppBrowser } from "@ionic-native/in-app-browser/ngx";
