@@ -14,6 +14,11 @@
 </ion-header>
 
 <ion-content>
+	<!-- <ion-spinner
+		name="crescent"
+		color="toastertheme"
+		*ngIf="showSpinner===true"
+	></ion-spinner> -->
 	<form [formGroup]="myForm" (ngSubmit)="onSubmit()" novalidate>
 		<ion-item lines="full">
 			<ion-label position="floating">Name</ion-label>
@@ -91,9 +96,10 @@
 		</span>
 		<ion-row>
 			<ion-col>
-				<ion-button type="submit" color="danger" expand="block"
-					>Proceed To Pay</ion-button
-				>
+				<ion-button type="submit" color="danger" expand="block">
+					<ion-icon *ngIf="showSpinner===true" name="reload"></ion-icon>
+					<ion-label>{{showSpinner?' Loading...':'Proceed To Pay'}}</ion-label>
+				</ion-button>
 			</ion-col>
 		</ion-row>
 	</form>
