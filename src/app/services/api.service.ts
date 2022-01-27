@@ -7,9 +7,9 @@ import { AlertController } from '@ionic/angular';
   providedIn: 'root'  
 })
 export class ApiService {
-  // public BASE_URL = 'https://example.com/public/api/';
+  public BASE_URL = 'http://66.45.36.13/TheBarberAdmin/public/api/';
   // public BASE_URL = 'http://192.168.0.148/laravel/the_barber_multi/programati/public/api/';
-  public BASE_URL = "https://saasmonks.in/App-Demo/thebarber-V2/public/api/";
+  // public BASE_URL = "https://saasmonks.in/App-Demo/thebarber-V2/public/api/";
   paymentData: any;
   addressData: any;
   latitude: number;
@@ -41,6 +41,37 @@ export class ApiService {
   isNewLogin() {
     return this.newLogin.asObservable();
   }
+
+  postCheckOutDetail(
+		name,
+		contact,
+		city,
+		state,
+		country,
+		address,
+		price,
+		quantity,
+		product_id
+	) {
+		let header = new HttpHeaders();
+		header = header.set("Authorization", "Bearer " + localStorage.getItem('token'));
+		header = header.set("Accept", "application/json");
+		return this.http
+			.post(`${this.BASE_URL}place-order`, {
+				name: name,
+				contact: contact,
+				city: city,
+				state: state,
+				country: country,
+				address: address,
+				price: price,
+				quantity: quantity,
+				product_id: product_id,
+			}, { headers: header })
+			.toPromise();
+
+		//return this.http.get(this.BASE_URL + url);
+	}
   
   getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
     var R = 6371; // Radius of the earth in km

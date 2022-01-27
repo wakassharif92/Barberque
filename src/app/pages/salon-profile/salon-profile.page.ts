@@ -5,19 +5,18 @@ import {
 	NavController,
 	Platform,
 } from "@ionic/angular";
-import { Router } from "@angular/router";
+import { NavigationEnd, Router } from "@angular/router";
 import { AddReviewPage } from "src/app/modals/add-review/add-review.page";
 import { UtilserviceService } from "src/app/services/utilservice.service";
 import { CallNumber } from "@ionic-native/call-number/ngx";
 import { NavigationExtras } from "@angular/router";
 import { ApiService } from "src/app/services/api.service";
-import { ApiSalonProductService } from "src/app/services/api-salon-product.service";
 import { Geolocation } from "@ionic-native/geolocation/ngx";
 import { PhotoViewer } from "@ionic-native/photo-viewer/ngx";
 import {
 	InAppBrowser,
-	InAppBrowserOptions,
 } from "@ionic-native/in-app-browser/ngx";
+import { Subscription } from "rxjs";
 @Component({
 	selector: "app-salon-profile",
 	templateUrl: "./salon-profile.page.html",
@@ -68,14 +67,14 @@ export class SalonProfilePage implements OnInit {
 	photo: any;
 	productsList: any;
 	cartCounter: any;
+	private subscription: Subscription;
 	constructor(
-		private Router: Router,
+		private router: Router,
 		private modal: ModalController,
 		private navCtrl: NavController,
 		private util: UtilserviceService,
 		private callNumber: CallNumber,
 		private api: ApiService,
-		private apisalon: ApiSalonProductService,
 		private geolocation: Geolocation,
 		private photoViewer: PhotoViewer,
 		private theInAppBrowser: InAppBrowser,
@@ -106,7 +105,24 @@ export class SalonProfilePage implements OnInit {
 			this.selectedDes = "SERVICES";
 			// console.log("this.selec", this.selectedDes);
 		}
+		
+		this.subscription = this.router.events.subscribe((event) => {
+            if (event instanceof NavigationEnd && event.url === '/tabs/home/salon-profile') {
+                this.onEnter();
+            }
+        });
 	}
+
+	onEnter(): void {
+        this.cartCounter = JSON.parse(localStorage.getItem("addProducts"));
+		console.log('cart counter', this.cartCounter);
+		if (this.cartCounter) {
+			this.cartCounter = this.cartCounter.length;
+		} else {
+			this.cartCounter = 0;
+		}
+    }
+
 
 	card: any;
 	openWithSystemBrowser(url: string) {
@@ -168,10 +184,6 @@ export class SalonProfilePage implements OnInit {
 		localStorage.setItem("total", this.api.total);
 	}
 
-	ionViewWillEnter() {
-		localStorage.removeItem("booking-detail");
-	}
-
 	buttonDiv: any = [
 		{
 			name: "SERVICES",
@@ -191,34 +203,23 @@ export class SalonProfilePage implements OnInit {
 	];
 
 	navigateToProductDetail(item) {
-		// let navigationExtras: NavigationExtras = {
-		// 	state: {
-		// 		id: id,
-		// 	},
-		// };
-		// this.Router.navigate(["tabs/home/product-detail"], navigationExtras);
-		// localStorage.setItem("productID", id);
-		//console.log(item.id);
 		localStorage.setItem("productDetail", JSON.stringify(item));
-		//	console.log("testingSalonProfileItem" + JSON.stringify(item));
 		this.navCtrl.navigateForward("/product-detail");
 	}
 	getSalonProducts() {
-		this.apisalon
+		this.api
 			.getData("salon-product/" + this.id)
 			.subscribe((mdata: any) => {
 				this.productsList = mdata.data;
 				//	console.log(this.productsList);
 			});
 	}
-	ngOnInit() {
-		this.cartCounter = JSON.parse(localStorage.getItem("addProducts"));
-		if (this.cartCounter) {
-			this.cartCounter = this.cartCounter.length;
-		} else {
-			this.cartCounter = 0;
-		}
 
+	ngOnDestroy(): void {
+        this.subscription.unsubscribe();
+    }
+
+	ngOnInit() {
 		this.util.startLoad();
 		this.api.getData("salon/" + this.id).subscribe(
 			(success: any) => {
@@ -305,6 +306,10 @@ export class SalonProfilePage implements OnInit {
 		this.timeClose = timeString + ":" + dt.getMinutes();
 
 		this.getSalonProducts();
+	}
+
+	ionViewWillEnter() {
+		localStorage.removeItem("booking-detail");
 	}
 
 	segmentChanged(event) {

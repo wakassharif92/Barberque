@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { NavController } from "@ionic/angular";
 import { ToastController } from "@ionic/angular";
-import { ApiSalonProductService } from "src/app/services/api-salon-product.service";
+import { ApiService } from "src/app/services/api.service";
 @Component({
 	selector: "app-product-detail",
 	templateUrl: "./product-detail.page.html",
@@ -15,34 +15,52 @@ export class ProductDetailPage implements OnInit {
 	cartCounter: any;
 	productList: any;
 	productID: any;
-	productImage: any;
+	productImages: any;
 	productPrice: any;
 	productTitle: any;
 	localstoragedata: any;
 	productDescription: any;
 
+	slideOpts = {
+		slidesPerView: 1,
+		initialSlide: 0,
+		speed: 400
+	  };
+	sliderOnePager: boolean = true;
+
 	constructor(
 		private navCtrl: NavController,
-		private apisalon: ApiSalonProductService,
+		private apiSvc: ApiService,
 		public toastController: ToastController
 	) {}
 
 	ngOnInit() {
-		this.cartCounter = JSON.parse(localStorage.getItem("addProducts"));
-		if (this.cartCounter) {
-			this.cartCounter = this.cartCounter.length;
-		} else {
-			this.cartCounter = 0;
-		}
+		// this.cartCounter = JSON.parse(localStorage.getItem("addProducts"));
+		// if (this.cartCounter) {
+		// 	this.cartCounter = this.cartCounter.length;
+		// } else {
+		// 	this.cartCounter = 0;
+		// }
 		this.currencyType = "$";
 		this.productDetail = JSON.parse(localStorage.getItem("productDetail"));
 		this.productID = this.productDetail.id;
-		this.productImage = this.productDetail.image[0].image;
+		this.productImages = this.productDetail.image;
 		this.productPrice = this.productDetail.price;
 		this.productTitle = this.productDetail.title;
 		this.productDescription = this.productDetail.description;
 		this.getSalonProductByID();
 	}
+
+	ionViewWillEnter() {
+		this.cartCounter = JSON.parse(localStorage.getItem("addProducts"));
+		console.log('cart counter', this.cartCounter);
+		if (this.cartCounter) {
+			this.cartCounter = this.cartCounter.length;
+		} else {
+			this.cartCounter = 0;
+		}
+	}
+
 	async presentToast() {
 		const toast = await this.toastController.create({
 			message: "Product has been already added.",
@@ -103,7 +121,7 @@ export class ProductDetailPage implements OnInit {
 						//console.log("new product");
 						products.push({
 							id: this.productID,
-							image: this.productImage,
+							image: this.productImages[0].image,
 							title: this.productTitle,
 							description: this.productDescription,
 							price: this.productPrice,
@@ -118,7 +136,7 @@ export class ProductDetailPage implements OnInit {
 				console.log("new product");
 				products.push({
 					id: this.productID,
-					image: this.productImage,
+					image: this.productImages[0].image,
 					title: this.productTitle,
 					description: this.productDescription,
 					price: this.productPrice,
@@ -131,13 +149,9 @@ export class ProductDetailPage implements OnInit {
 		}
 	}
 	getSalonProductByID() {
-		this.apisalon.getData("salon-product/" + 1).subscribe((mdata: any) => {
+		this.apiSvc.getData("salon-product/" + 1).subscribe((mdata: any) => {
 			this.productList = mdata.data[0];
 			//	console.log(this.productList);
 		});
-	}
-	backs() {
-		localStorage.removeItem("productID");
-		this.navCtrl.navigateForward("/tabs/home/salon-profile");
 	}
 }

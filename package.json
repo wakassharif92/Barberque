@@ -54,11 +54,13 @@
         "call-number": "^1.0.1",
         "com-sarriaroman-photoviewer": "^1.2.5",
         "cordova": "^9.0.0",
-        "cordova-android": "^8.1.0",
+        "cordova-android": "^9.1.0",
         "cordova-instagram-plugin": "^0.5.8",
+        "cordova-ios": "5.1.1",
         "cordova-plugin-add-swift-support": "^2.0.2",
         "cordova-plugin-badge": "^0.8.8",
         "cordova-plugin-camera": "^4.1.0",
+        "cordova-plugin-customurlscheme": "^5.0.2",
         "cordova-plugin-device": "^2.0.3",
         "cordova-plugin-facebook-connect": "^2.3.0",
         "cordova-plugin-geolocation": "^4.0.2",
@@ -140,6 +142,12 @@
             "cordova-plugin-googleplus": {
                 "REVERSED_CLIENT_ID": "",
                 "WEB_APPLICATION_CLIENT_ID": ""
+            },
+            "cordova-plugin-customurlscheme": {
+                "URL_SCHEME": "thebarberapp",
+                "ANDROID_SCHEME": " ",
+                "ANDROID_HOST": " ",
+                "ANDROID_PATHPREFIX": "/"
             },
             "cordova-plugin-facebook-connect": {
                 "APP_ID": "2040015982704493",

@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { NavController } from "@ionic/angular";
+import { ApiService } from "src/app/services/api.service";
 
 @Component({
 	selector: "app-cart",
@@ -25,7 +26,7 @@ export class CartPage implements OnInit {
 
 	storageProducts: any;
 	productDescription: any;
-	constructor(private navCtrl: NavController) {
+	constructor(private navCtrl: NavController, private apiSvc: ApiService) {
 		this.getCartItems();
 	}
 	// getTotal(pPrice) {

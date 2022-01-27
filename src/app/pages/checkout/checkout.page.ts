@@ -3,10 +3,11 @@ import { NavController, Platform } from "@ionic/angular";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 // import { Stripe } from "@awesome-cordova-plugins/stripe/ngx";
 import {
-	InAppBrowser,
-	InAppBrowserOptions,
+	InAppBrowser
 } from "@ionic-native/in-app-browser/ngx";
 import { PlaceOrderApiService } from "src/app/services/place-order-api.service";
+import { UtilserviceService } from "src/app/services/utilservice.service";
+import { ApiService } from "src/app/services/api.service";
 @Component({
 	selector: "app-checkout",
 	templateUrl: "./checkout.page.html",
@@ -19,7 +20,8 @@ export class CheckoutPage implements OnInit {
 	submitted = false;
 	constructor(private navCtrl: NavController, public formBuilder: FormBuilder, /*private stripe: Stripe,*/ private platform: Platform, private theInAppBrowser: InAppBrowser
 	,
-		public ApiPlaceOrderDetail: PlaceOrderApiService
+		private utilSvc: UtilserviceService,
+		public apiSvc: ApiService
 	) {
 		this.myForm = this.formBuilder.group({
 			name: ["", [Validators.required, Validators.minLength(3)]],
@@ -40,7 +42,21 @@ export class CheckoutPage implements OnInit {
 		});
 	}
 
-	ngOnInit() {}
+	ngOnInit() {
+		try {
+			(<any>window).handleOpenURL = (url: string) => {
+				setTimeout(() => {
+					
+					// if (this.device.platform === 'iOS') {
+					// 	this.browser.hide();
+					// }
+					this.stripeCheckout(url);
+				}, 0);
+			  };
+		} catch(error) {
+			console.error(error);
+		}
+	}
 	backs() {
 		this.navCtrl.navigateForward("/cart");
 	}
@@ -61,11 +77,10 @@ export class CheckoutPage implements OnInit {
 			console.log("All fields are required.");
 			return false;
 		} else {
-			this.showSpinner = true;
-			//console.log(this.myForm.value);
+			try {
+				this.showSpinner = true;
 			this.cartItemsDetails = localStorage.getItem("addProducts");
-			//console.log(this.cartItemsDetails);
-			//this.cartItemsDetails = JSON.parse(this.cartItemsDetails);
+			this.cartItemsDetails = JSON.parse(this.cartItemsDetails);
 			console.log(this.cartItemsDetails[0].id);
 			const name = this.myForm.get("name").value;
 			const contact = this.myForm.get("phone").value;
@@ -77,7 +92,7 @@ export class CheckoutPage implements OnInit {
 			const price = this.cartItemsDetails[0].price;
 			const quantity = this.cartItemsDetails[0].quantity;
 
-			const res = await this.ApiPlaceOrderDetail.postCheckOutDetail(
+			const res: any = await this.apiSvc.postCheckOutDetail(
 				name,
 				contact,
 				city,
@@ -88,10 +103,30 @@ export class CheckoutPage implements OnInit {
 				quantity,
 				product_id
 			);
+			// if (res)
 			this.showSpinner = false;
-			// if (res === "true") {
-			// } else {
-			// }
+			console.log(res);
+			if (res.success) {
+				let target = "_system";
+				// this.theInAppBrowser.create(
+				// 	'https://thebarberapp.com?checkout=success',
+				// 	target, 'location=yes'
+				// );
+				this.theInAppBrowser.create(
+					res.session_url, 
+					target, 'location=yes');
+			} else {
+				this.utilSvc.presentToast(res.message);
+			}
+			} catch (error) {
+				if (error.status == 401) {
+					this.utilSvc.presentToast('Please login first to place order!');
+				} else {
+					this.utilSvc.presentToast(error.message);
+				}
+				this.showSpinner = false;
+				console.error(error);
+			}
 		}
 	}
 
@@ -117,4 +152,24 @@ export class CheckoutPage implements OnInit {
 		//    .then(token => console.log(token.id))
 		//    .catch(error => console.error(error));
 	}
+
+	async stripeCheckout(url: string): Promise<void> {
+		try {
+		  const urlObject = new URL(`${url.split('#')[0]}`);
+		  if (urlObject.protocol !== 'thebarberapp:') {
+			return;
+		  }
+		  console.log('url search', urlObject.search);
+		  const urlParams = url ? new URLSearchParams(urlObject.search) : undefined;
+		  console.log('URL Params', urlParams);
+		  const success = urlParams ? urlParams.get('checkout') : undefined;
+		  console.log('success', success);;
+		  if (success && success == 'success') {
+			  localStorage.removeItem('addProducts');
+			  this.navCtrl.navigateRoot('/');
+		  }
+		} catch (error) {
+		  console.error(error);
+		}
+	  }
 }

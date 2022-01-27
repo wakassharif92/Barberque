@@ -12,4 +12,8 @@ export class ApiSalonProductService {
 	getData(url) {
 		return this.http.get(this.BASE_URL + url);
 	}
+
+	postData(url,data){
+		return this.http.post(this.BASE_URL + url , data)
+	}
 }

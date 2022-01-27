@@ -69,6 +69,12 @@ export class HomePage {
 
 	ionViewWillEnter() {
 		// console.log("view","hiii");
+		this.cartCounter = JSON.parse(localStorage.getItem("addProducts"));
+		if (this.cartCounter) {
+			this.cartCounter = this.cartCounter.length;
+		} else {
+			this.cartCounter = 0;
+		}
 		this.util.startLoad();
 		this.language = localStorage.getItem("lan");
 		this.selectAddress = localStorage.getItem("dataofaddress");
@@ -85,13 +91,6 @@ export class HomePage {
 	}
 
 	ngOnInit() {
-		this.cartCounter = JSON.parse(localStorage.getItem("addProducts"));
-		if (this.cartCounter) {
-			this.cartCounter = this.cartCounter.length;
-		} else {
-			this.cartCounter = 0;
-		}
-
 		// console.log("onit","hiii");
 		this.util.startLoad();
 		this.language = localStorage.getItem("lan");

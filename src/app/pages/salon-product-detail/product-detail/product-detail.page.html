@@ -6,7 +6,6 @@
 				defaultHref="tabs/appointment"
 				text=""
 				icon="chevron-back"
-				(click)="backs()"
 			></ion-back-button>
 		</ion-buttons>
 		<ion-title> {{'SalonProductDetail.productDetails' | translate}} </ion-title>
@@ -20,9 +19,19 @@
 </ion-header>
 
 <ion-content>
-	<div>
-		<ion-img style="width: 100%" [src]="productImage"></ion-img>
-	</div>
+
+	<ion-slides
+      #sliderOne
+      [options]="slideOpts"
+      [pager]="sliderOnePager"
+      class="pure-multi-slider photo-request-list"
+	>
+	<ion-slide *ngFor="let productImage of productImages">
+		<div>
+			<ion-img style="width: 100%" [src]="productImage.image"></ion-img>
+		</div>
+	</ion-slide>
+	</ion-slides>
 	<hr />
 	<div class="product-padding">
 		<ion-label class="product-price"

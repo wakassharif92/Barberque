@@ -150,8 +150,27 @@ export class LoginPage implements OnInit {
     );
     this.api.postDataWithToken("login", fd).subscribe(
       (success: any) => {
+        // const formdata = new FormData();
+        // formdata.append("email", "apiuser@gmail.com");
+        // formdata.append("password", "123456789");
+        // formdata.append("provider", "local");
+        // this.apiSalonProductSvc.postData("login", formdata).subscribe(
+        //   (success: any) => {
+        //     console.log('success2', success);
+        //     localStorage.setItem("token2", success.data.token);
+        //     this.util.dismissLoader();
+        //     this.errors = "";
+        //     this.passwordd = "";
+        //     this.util.presentToast(success.msg);
+        //   },
+        //   (error: any) => {
+        //     console.log(error.error.error);
+        //     this.errall = error.error.error;
+        //     this.err = error.error.errors;
+        //   }
+        // )
+        console.log('success1', success);
         this.util.dismissLoader();
-        console.log(success);
         this.errors = "";
         this.passwordd = "";
         this.util.presentToast(success.msg);
@@ -163,7 +182,6 @@ export class LoginPage implements OnInit {
           } else {
             this.util.presentToast("Această autentificare nu este verificată");
           }
-
           let send = {
             email: this.inputData.email,
           };
