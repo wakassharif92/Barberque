@@ -52,7 +52,7 @@ export class AppComponent {
 		if (this.isUserLoggedIn == null) {
 			this.isUserLoggedIn = false;
 		}
-		this.isUserLoggedIn = true; //for testing purpose, I'm enabling it. For production, make this line of code comment.
+		//this.isUserLoggedIn = true; //for testing purpose, I'm enabling it. For production, make this line of code comment.
 		console.log("Is User logged In: " + this.isUserLoggedIn);
 		this.initializeApp();
 		// console.log = function () {};
