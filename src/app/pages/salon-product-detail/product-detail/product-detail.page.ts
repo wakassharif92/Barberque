@@ -24,8 +24,8 @@ export class ProductDetailPage implements OnInit {
 	slideOpts = {
 		slidesPerView: 1,
 		initialSlide: 0,
-		speed: 400
-	  };
+		speed: 400,
+	};
 	sliderOnePager: boolean = true;
 
 	constructor(
@@ -53,7 +53,7 @@ export class ProductDetailPage implements OnInit {
 
 	ionViewWillEnter() {
 		this.cartCounter = JSON.parse(localStorage.getItem("addProducts"));
-		console.log('cart counter', this.cartCounter);
+		console.log("cart counter", this.cartCounter);
 		if (this.cartCounter) {
 			this.cartCounter = this.cartCounter.length;
 		} else {
@@ -129,7 +129,6 @@ export class ProductDetailPage implements OnInit {
 						});
 						localStorage.setItem("addProducts", JSON.stringify(products));
 						this.navCtrl.navigateForward("/cart");
-						//console.log("Add in Cart:" + JSON.stringify(products));
 					}
 				}
 			} else {

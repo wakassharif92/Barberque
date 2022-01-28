@@ -88,6 +88,13 @@ const routes: Routes = [
 							),
 					},
 					{
+						path: "orders",
+						loadChildren: () =>
+							import("../../pages/orders/orders.module").then(
+								(m) => m.OrdersPageModule
+							),
+					},
+					{
 						path: "terms",
 						loadChildren: () =>
 							import("../../pages/terms/terms.module").then(

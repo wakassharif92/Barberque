@@ -216,10 +216,33 @@ const routes: Routes = [
 		loadChildren: () =>
 			import("./pages/cart/cart.module").then((m) => m.CartPageModule),
 	},
-  {
-    path: 'checkout',
-    loadChildren: () => import('./pages/checkout/checkout.module').then( m => m.CheckoutPageModule)
-  },
+
+	{
+		path: "orderdetail",
+		loadChildren: () =>
+			import("./pages/order-detail/order-detail-routing.module").then(
+				(m) => m.OrderDetailPageRoutingModule
+			),
+	},
+	{
+		path: "checkout",
+		loadChildren: () =>
+			import("./pages/checkout/checkout.module").then(
+				(m) => m.CheckoutPageModule
+			),
+	},
+	{
+		path: "orders",
+		loadChildren: () =>
+			import("./pages/orders/orders.module").then((m) => m.OrdersPageModule),
+	},
+	{
+		path: "order-detail",
+		loadChildren: () =>
+			import("./pages/order-detail/order-detail.module").then(
+				(m) => m.OrderDetailPageModule
+			),
+	},
 ];
 
 @NgModule({

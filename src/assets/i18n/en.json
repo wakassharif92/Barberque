@@ -278,6 +278,7 @@
         "book": "Book"
     },
     "menu": {
+        "orders":"Orders",
         "offes": "Top Offers",
         "terms": "Terms & Conditions",
         "privacy": "Privacy Policy",

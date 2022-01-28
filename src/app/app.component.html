@@ -7,6 +7,9 @@
 	>
 		<ion-content mode="ios" class="ion-padding">
 			<div class="btn_div">
+				<p *ngIf="isUserLoggedIn" (click)="orders()">
+					{{ "menu.orders" | translate }}
+				</p>
 				<p (click)="offers()">{{ "menu.offes" | translate }}</p>
 				<p (click)="terms()">{{ "menu.terms" | translate }}</p>
 				<p (click)="privacy()">{{ "menu.privacy" | translate }}</p>

@@ -1,0 +1,31 @@
+.order-address {
+	text-transform: none;
+	font-size: 0.8rem;
+	color: deeppink;
+	font-family: mon-bold;
+}
+.product-title {
+	text-transform: none;
+	font-size: 1.5rem;
+	color: black;
+	font-family: mon-bold;
+}
+product-description-h-color {
+	color: grey;
+	// float: left;
+	margin-bottom: 10px;
+}
+.product-description {
+	text-transform: none;
+	font-size: 1rem;
+	color: var(--input-text-color);
+	font-family: mon-light;
+}
+.product-padding {
+	padding: 10px;
+}
+hr {
+	color: black;
+	height: 0px;
+	border-width: 0.1px;
+}
