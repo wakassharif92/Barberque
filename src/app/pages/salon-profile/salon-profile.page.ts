@@ -13,9 +13,7 @@ import { NavigationExtras } from "@angular/router";
 import { ApiService } from "src/app/services/api.service";
 import { Geolocation } from "@ionic-native/geolocation/ngx";
 import { PhotoViewer } from "@ionic-native/photo-viewer/ngx";
-import {
-	InAppBrowser,
-} from "@ionic-native/in-app-browser/ngx";
+import { InAppBrowser } from "@ionic-native/in-app-browser/ngx";
 import { Subscription } from "rxjs";
 @Component({
 	selector: "app-salon-profile",
@@ -105,24 +103,26 @@ export class SalonProfilePage implements OnInit {
 			this.selectedDes = "SERVICES";
 			// console.log("this.selec", this.selectedDes);
 		}
-		
+
 		this.subscription = this.router.events.subscribe((event) => {
-            if (event instanceof NavigationEnd && event.url === '/tabs/home/salon-profile') {
-                this.onEnter();
-            }
-        });
+			if (
+				event instanceof NavigationEnd &&
+				event.url === "/tabs/home/salon-profile"
+			) {
+				this.onEnter();
+			}
+		});
 	}
 
 	onEnter(): void {
-        this.cartCounter = JSON.parse(localStorage.getItem("addProducts"));
-		console.log('cart counter', this.cartCounter);
+		this.cartCounter = JSON.parse(localStorage.getItem("addProducts"));
+		console.log("cart counter", this.cartCounter);
 		if (this.cartCounter) {
 			this.cartCounter = this.cartCounter.length;
 		} else {
 			this.cartCounter = 0;
 		}
-    }
-
+	}
 
 	card: any;
 	openWithSystemBrowser(url: string) {
@@ -207,17 +207,15 @@ export class SalonProfilePage implements OnInit {
 		this.navCtrl.navigateForward("/product-detail");
 	}
 	getSalonProducts() {
-		this.api
-			.getData("salon-product/" + this.id)
-			.subscribe((mdata: any) => {
-				this.productsList = mdata.data;
-				//	console.log(this.productsList);
-			});
+		this.api.getData("salon-product/" + this.id).subscribe((mdata: any) => {
+			this.productsList = mdata.data;
+			//	console.log(this.productsList);
+		});
 	}
 
 	ngOnDestroy(): void {
-        this.subscription.unsubscribe();
-    }
+		this.subscription.unsubscribe();
+	}
 
 	ngOnInit() {
 		this.util.startLoad();

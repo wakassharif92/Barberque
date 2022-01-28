@@ -15,21 +15,23 @@
 
 <ion-content>
 	<!-- *ngFor="let item of storageProducts;let i=index" -->
-	<ion-item (click)="openOrderDetail()">
+	<ion-item
+		*ngFor="let order of ordersList;let i=index"
+		(click)="openOrderDetail(order)"
+	>
 		<ion-avatar slot="start">
-			<img src="../../../assets/Ellipse 9.png" />
+			<ion-icon style="zoom: 3; color: deeppink" name="cube"></ion-icon>
 		</ion-avatar>
-
 		<ion-label>
-			<h2 class="product-name-styling">Dove</h2>
-
-			<h4 class="product-description-h-color">Order ID: 154</h4>
-
+			<h2 class="product-name-styling">Product Name: {{order.name}}</h2>
+			<h4 *ngIf="order.tracking_no!=null" class="product-description-h-color">
+				Tracking Number: {{order.tracking_no}}
+			</h4>
 			<ion-label class="label-price"
-				><p class="product-label">Price: $500</p></ion-label
+				><p class="product-label">Price: {{order.total_price}}</p></ion-label
 			>
 			<ion-label class="label-q"
-				><p class="quantity-label">Quantity: 2</p></ion-label
+				><p class="quantity-label">Quantity: {{order.quantity}}</p></ion-label
 			>
 		</ion-label>
 	</ion-item>
